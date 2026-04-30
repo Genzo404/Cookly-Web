@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookly | Favorites</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles/navbar.css" />
+  <link rel="stylesheet" href="../styles/buttons.css" />
+  <link rel="stylesheet" href="../styles/cards.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+
+  <style>
+    .fav-loader {
+      display: none;
+      text-align: center;
+      margin: 16px 0 24px;
+      color: #4b5563;
+      font-weight: 500;
+    }
+    .fav-loader.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../Cookly.html" class="logo">Cookly</a>
+      <nav class="nav-links">
+        <a href="../Cookly.html#home">Home</a>
+        <a href="../Cookly.html#recipes">Recipes</a>
+        <a href="favourites.html">Favorites</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="favorites-section" id="favorites" style="display:block;">
+      <div class="container">
+        <div class="section-heading center">
+          <h2>Your Favorites</h2>
+          <p>Recipes saved to your account.</p>
+        </div>
+
+        <p id="favLoader" class="fav-loader">Loading favorites...</p>
+        <p id="favStatus"></p>
+        <div id="favoritesGrid" class="recipe-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="../scripts/favourites.js"></script>
+</body>
+</html>

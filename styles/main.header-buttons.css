@@ -1,0 +1,154 @@
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(245, 238, 222, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  font-family: "Fredoka", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-weight: 500;
+  color: var(--primary);
+  transition: 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcome-text {
+  font-weight: 700;
+  color: #0d2f87;
+  white-space: nowrap;
+}
+
+.menu-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  padding: 12px 22px;
+  font-weight: 700;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid rgba(2, 33, 117, 0.18);
+}
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.btn-large {
+  padding: 16px 28px;
+  font-size: 1rem;
+}
+
+/* Landing button variants (Primary / Secondary / Third) */
+.hero-buttons .btn {
+  min-height: 50px;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  box-shadow: var(--interactive-shadow);
+}
+
+.hero-buttons .btn-primary {
+  background: linear-gradient(135deg, var(--interactive-primary-bg), var(--interactive-primary-bg-hover));
+  color: var(--white);
+  border-color: rgba(var(--accent-rgb), 0.55);
+  box-shadow: 0 10px 22px rgba(var(--accent-rgb), 0.3);
+}
+
+.hero-buttons .btn-primary:hover {
+  background: linear-gradient(135deg, var(--interactive-primary-bg-hover), #b94331);
+}
+
+.hero-buttons .btn-secondary {
+  background: var(--white);
+  color: var(--primary);
+  border-color: rgba(var(--accent-rgb), 0.44);
+  box-shadow: 0 6px 14px rgba(var(--primary-rgb), 0.1), inset 0 0 0 1px rgba(var(--primary-rgb), 0.07);
+}
+
+.hero-buttons .btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.08), rgba(var(--accent-rgb), 0.12));
+  border-color: rgba(var(--primary-rgb), 0.4);
+}
+
+.hero-buttons #getAppBtn {
+  background: transparent;
+  color: var(--primary-light);
+  border-color: var(--interactive-outline-color);
+  box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.08);
+}
+
+.hero-buttons #getAppBtn:hover {
+  border-color: rgba(var(--accent-rgb), 0.5);
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.06), var(--interactive-outline-hover));
+}

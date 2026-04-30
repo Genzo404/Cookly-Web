@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookly | Recipe Discovery</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="styles/buttons.css" />
+  <link rel="stylesheet" href="styles/cards.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav">
+      <a href="Cookly.html" class="logo">Cookly</a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#recipes">Recipes</a>
+        <a href="pages/favourites.html">Favorites</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        
+      </nav>
+
+      <!-- 🔥 UPDATED NAV ACTIONS -->
+      <div class="nav-actions" id="navActions">
+        <div id="guestActions" class="auth-actions">
+          <a href="pages/Login.html" class="btn btn-outline">Log In</a>
+          <a href="pages/Register.html" class="btn btn-primary">Get Started</a>
+        </div>
+
+        <div id="userActions" class="auth-actions" style="display: none;">
+          <span id="welcomeText" class="welcome-text"></span>
+          <button id="logoutBtn" class="btn btn-outline" type="button">Log Out</button>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div class="hero-text">
+          <p class="eyebrow">30K+ PREMIUM RECIPES</p>
+
+          <h1>It’s <br />Cooking Time!</h1>
+
+          <p class="hero-description">
+            Discover delicious recipes, save your favorites, and make cooking
+            simple, fun, and beautiful with Cookly.
+          </p>
+
+          <div class="hero-buttons">
+            <!-- 🔥 UPDATED CTA -->
+            <a href="pages/Register.html" class="btn btn-primary btn-large">
+              Start Cooking!
+            </a>
+
+            <a href="https://github.com/Genzo404/Cookly" class="btn btn-outline btn-large" id="getAppBtn">
+              Get Our Mobile App
+             </a>
+
+            <a href="#recipes" class="btn btn-secondary btn-large">
+              Explore Recipes
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-number">30K+</span>
+              <span class="stat-label">Recipes</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-number">12K+</span>
+              <span class="stat-label">Food Lovers</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-number">4.9★</span>
+              <span class="stat-label">User Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="image-card">
+            <img
+              src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80"
+              alt="Food"
+            />
+          </div>
+
+          <div class="floating-badge badge-one">
+            🔥 Trending Recipes
+          </div>
+
+          <div class="floating-badge badge-two">
+            ❤️ Save Favorites
+          </div>
+        </div>
+      </div>
+
+      <div class="shape shape-blue"></div>
+      <div class="shape shape-coral"></div>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="search-section" id="recipes">
+      <div class="container">
+
+        <div class="section-heading center">
+          <h2>Find your next meal</h2>
+          <p>Search recipes by name, ingredient, or category.</p>
+        </div>
+
+        <div class="search-bar">
+          <input
+            id="recipeSearch"
+            placeholder="Search for pasta, chicken..."
+          />
+          <button id="searchButton" class="btn btn-primary">Search</button>
+        </div>
+
+        <div class="search-filters" aria-label="Recipe filters">
+          <select id="categoryFilter">
+            <option value="">All categories</option>
+          </select>
+          <input id="maxTimeFilter" type="number" min="0" placeholder="Max time (min)" />
+          <input id="maxCaloriesFilter" type="number" min="0" placeholder="Max calories" />
+          <button id="clearFilters" class="btn btn-outline" type="button">Clear</button>
+        </div>
+
+        <div class="recipe-grid" id="recipeGrid">
+
+          <article class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19" />
+            <div class="recipe-card-content">
+              <span class="recipe-tag">Italian</span>
+              <h3>Creamy Pasta</h3>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4" />
+            <div class="recipe-card-content">
+              <span class="recipe-tag">Healthy</span>
+              <h3>Chicken Bowl</h3>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187" />
+            <div class="recipe-card-content">
+              <span class="recipe-tag">Dessert</span>
+              <h3>Chocolate Cake</h3>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAVORITES SECTION -->
+    <section class="favorites-section" id="favorites" style="display: none;">
+      <div class="container">
+        <div class="section-heading center">
+          <h2>Your Favorites</h2>
+          <p>The recipes you love, all in one place.</p>
+        </div>
+
+        <div id="favoritesContent"></div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Why Cookly?</h2>
+          <p>Your recipe app experience, now on the web.</p>
+        </div>
+
+        <div class="features-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon">🔎</div>
+            <h3>Smart Search</h3>
+            <p>Find recipes fast.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">❤️</div>
+            <h3>Favorites</h3>
+            <p>Save recipes you love.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">👤</div>
+            <h3>Profile</h3>
+            <p>Manage your cooking journey.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔥</div>
+            <h3>Trending</h3>
+            <p>Discover popular dishes.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <h3>Cookly</h3>
+        <p>Cook beautifully.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#recipes">Recipes</a>
+        <a href="#features">Features</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="scripts/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+:root {
+  --bg: #f5eede;
+  --bg-soft: #fffaf2;
+  --primary: #022175;
+  --primary-light: #09338c;
+  --accent: #e4614a;
+  --accent-dark: #cf4f39;
+  --primary-rgb: 2, 33, 117;
+  --accent-rgb: 228, 97, 74;
+  --text: #263238;
+  --muted: #6b7280;
+  --white: #ffffff;
+  --border: rgba(2, 33, 117, 0.08);
+  --shadow: 0 14px 40px rgba(2, 33, 117, 0.08);
+  --interactive-primary-bg: var(--accent);
+  --interactive-primary-bg-hover: var(--accent-dark);
+  --interactive-outline-color: rgba(var(--primary-rgb), 0.28);
+  --interactive-outline-hover: rgba(var(--accent-rgb), 0.14);
+  --interactive-shadow: 0 8px 18px rgba(var(--primary-rgb), 0.16);
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+  --container: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.container {
+  width: min(92%, var(--container));
+  margin: 0 auto;
+}

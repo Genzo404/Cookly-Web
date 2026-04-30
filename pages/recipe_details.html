@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookly | Recipe Details</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles/navbar.css" />
+  <link rel="stylesheet" href="../styles/buttons.css" />
+  <link rel="stylesheet" href="../styles/cards.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/recipe-details.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../Cookly.html" class="logo">Cookly</a>
+      <nav class="nav-links">
+        <a href="../Cookly.html#home">Home</a>
+        <a href="../Cookly.html#recipes">Recipes</a>
+        <a href="favourites.html">Favorites</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="details-wrap">
+    <div class="container">
+      <article id="detailsCard" class="details-card">
+        <p id="detailsStatus" class="details-status">Loading recipe...</p>
+      </article>
+    </div>
+  </main>
+
+  <script type="module" src="../scripts/recipe_details.js"></script>
+</body>
+</html>

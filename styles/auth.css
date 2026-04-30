@@ -1,0 +1,122 @@
+:root {
+  --bg: #f5eede;
+  --primary: #022175;
+  --accent: #e4614a;
+  --white: #ffffff;
+  --muted: #6b7280;
+  --shadow: 0 14px 40px rgba(2, 33, 117, 0.1);
+  --radius: 24px;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: var(--bg);
+}
+
+/* Container */
+.auth-container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+/* Card */
+.auth-card {
+  background: var(--white);
+  padding: 40px 30px;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  z-index: 2;
+}
+
+.auth-card h1 {
+  font-family: "Fredoka", sans-serif;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.auth-card p {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.input-group {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+/* Button */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  background: #cf4f39;
+}
+
+/* Switch */
+.auth-switch {
+  margin-top: 20px;
+}
+
+.auth-switch a {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Message */
+.message {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--primary);
+}
+
+/* Shapes */
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.shape-blue {
+  width: 200px;
+  height: 200px;
+  background: rgba(2, 33, 117, 0.1);
+  top: 0;
+  left: 0;
+}
+
+.shape-coral {
+  width: 180px;
+  height: 180px;
+  background: rgba(228, 97, 74, 0.15);
+  bottom: 0;
+  right: 0;
+}
