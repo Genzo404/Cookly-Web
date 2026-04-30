@@ -128,7 +128,7 @@ function getStoredName() {
 function updateNavbar(user) {
   if (!guestActions || !userActions || !welcomeText) return;
 
-  const name = user?.displayName || getStoredName() || user?.email?.split("@")[0] || "";
+  const name = user?.displayName || getStoredName() || user?.name?.split("@")[0] || "";
 
   if (user || name) {
     guestActions.style.display = "none";
