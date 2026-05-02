@@ -130,25 +130,15 @@
 }
 
 .hero-buttons .btn-secondary {
-  background: var(--white);
-  color: var(--primary);
-  border-color: rgba(var(--accent-rgb), 0.44);
-  box-shadow: 0 6px 14px rgba(var(--primary-rgb), 0.1), inset 0 0 0 1px rgba(var(--primary-rgb), 0.07);
-}
-
-.hero-buttons .btn-secondary:hover {
-  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.08), rgba(var(--accent-rgb), 0.12));
-  border-color: rgba(var(--primary-rgb), 0.4);
-}
-
-.hero-buttons #getAppBtn {
-  background: transparent;
+ background: transparent;
   color: var(--primary-light);
   border-color: var(--interactive-outline-color);
   box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.08);
 }
 
-.hero-buttons #getAppBtn:hover {
+.hero-buttons .btn-secondary:hover {
   border-color: rgba(var(--accent-rgb), 0.5);
   background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.06), var(--interactive-outline-hover));
 }
+
+
