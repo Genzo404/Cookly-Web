@@ -54,12 +54,10 @@ function resolveRecipeImagePath(value) {
   const normalized = String(value).trim().replace(/\\/g, "/");
   if (!normalized) return fallback;
 
-  // Keep already absolute/explicit paths untouched.
   if (/^(https?:|data:|blob:|\/|\.\/|\.\.\/)/i.test(normalized)) {
     return normalized;
   }
 
-  // This file runs from /pages, so prepend ../ for project-root relative asset paths.
   return `../${normalized.replace(/^\/+/, "")}`;
 }
 
