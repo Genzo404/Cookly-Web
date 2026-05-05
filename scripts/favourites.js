@@ -1,30 +1,15 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import {
-  getFirestore,
   collection,
   getDocs,
   getDoc,
   doc,
   query,
   where,
-  limit
+  limit,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyCCvCaNzHTh3UqIpD_41bHLU1s5n6ikFh8",
-  authDomain: "cookly-e712f.firebaseapp.com",
-  projectId: "cookly-e712f",
-  storageBucket: "cookly-e712f.firebasestorage.app",
-  messagingSenderId: "997020620472",
-  appId: "1:997020620472:web:0079ce8ac214cb5af3864d",
-  measurementId: "G-PW4N8P0RQZ"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { auth, db } from "./firebase.js";
 
 const favStatus = document.getElementById("favStatus");
 const favoritesGrid = document.getElementById("favoritesGrid");
@@ -75,7 +60,26 @@ function resolveRecipeImagePath(value) {
   return `../${normalized.replace(/^\/+/, "")}`;
 }
 
-function recipeCard(recipe) {
+async function unfavorite(recipeId, uid, cardEl) {
+  try {
+    const q = query(
+      collection(db, "favorites"),
+      where("userId", "==", uid),
+      where("recipeId", "==", recipeId)
+    );
+    const snap = await getDocs(q);
+    await Promise.all(snap.docs.map(d => deleteDoc(d.ref)));
+    cardEl.remove();
+
+    if (!favoritesGrid.children.length) {
+      favStatus.textContent = "You have no favorites yet.";
+    }
+  } catch (err) {
+    console.error("Unfavorite error:", err);
+  }
+}
+
+function recipeCard(recipe, uid) {
   const id = recipe.id || recipe.recipeId || "";
   const name = recipe.name || recipe.title || "Untitled Recipe";
   const image = resolveRecipeImagePath(recipe.imageURL || recipe.image);
@@ -85,24 +89,31 @@ function recipeCard(recipe) {
     ? `recipe_details.html?id=${encodeURIComponent(id)}`
     : "recipe_details.html";
 
-  return `
-    <article class="recipe-card">
-      <img src="${image}" alt="${name}" />
-      <div class="recipe-card-content">
+  const article = document.createElement("article");
+  article.className = "recipe-card";
+  article.innerHTML = `
+    <img src="${image}" alt="${name}" />
+    <div class="recipe-card-content">
+      <div class="recipe-card-top">
         <span class="recipe-tag">${category}</span>
-        <h3>${name}</h3>
-        <div class="recipe-card-footer">
-          <div class="recipe-meta" aria-label="Recipe details">
-            <span class="recipe-meta-item">${calories}</span>
-            <span class="recipe-meta-item">${time}</span>
-          </div>
-          <div class="recipe-card-actions">
-            <a class="btn btn-primary recipe-view-btn" href="${detailsUrl}">View</a>
-          </div>
+        <button class="fav-btn is-fav" aria-label="Remove from favorites">❤️</button>
+      </div>
+      <h3>${name}</h3>
+      <div class="recipe-card-footer">
+        <div class="recipe-meta" aria-label="Recipe details">
+          <span class="recipe-meta-item">${calories}</span>
+          <span class="recipe-meta-item">${time}</span>
+        </div>
+        <div class="recipe-card-actions">
+          <a class="btn btn-primary recipe-view-btn" href="${detailsUrl}">View</a>
         </div>
       </div>
-    </article>
+    </div>
   `;
+
+  article.querySelector(".fav-btn").addEventListener("click", () => unfavorite(id, uid, article));
+
+  return article;
 }
 
 async function fetchRecipeById(recipeId) {
@@ -146,7 +157,7 @@ async function loadFavorites(uid) {
       return;
     }
 
-    favoritesGrid.innerHTML = recipes.map(recipeCard).join("");
+    recipes.forEach(recipe => favoritesGrid.appendChild(recipeCard(recipe, uid)));
   } catch (err) {
     console.error("Favorites load error:", err);
     favStatus.textContent = `Failed to load favorites: ${err.message}`;
