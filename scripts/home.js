@@ -1,11 +1,8 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import {
-  getAuth,
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import {
-  getFirestore,
   collection,
   getDocs,
   query,
@@ -13,21 +10,7 @@ import {
   addDoc,
   deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-/* Firebase */
-const firebaseConfig = {
-  apiKey: "AIzaSyCCvCaNzHTh3UqIpD_41bHLU1s5n6ikFh8",
-  authDomain: "cookly-e712f.firebaseapp.com",
-  projectId: "cookly-e712f",
-  storageBucket: "cookly-e712f.firebasestorage.app",
-  messagingSenderId: "997020620472",
-  appId: "1:997020620472:web:0079ce8ac214cb5af3864d",
-  measurementId: "G-PW4N8P0RQZ"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { auth, db } from "./firebase.js";
 
 /* Ensure missing HTML blocks exist (safe fallback) */
 function ensureNavActions() {
