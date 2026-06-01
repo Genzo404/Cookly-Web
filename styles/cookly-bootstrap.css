@@ -1,0 +1,163 @@
+/*
+ * Cookly Bootstrap Bridge
+ * Load this AFTER bootstrap.min.css and BEFORE page-specific CSS.
+ * Maps Bootstrap's design tokens to Cookly's brand, and keeps all
+ * existing Cookly CSS variables available for custom components.
+ */
+
+/* ── Cookly design tokens (keep all existing variables working) ── */
+:root {
+  --bg: #f5eede;
+  --bg-soft: #fffaf2;
+  --primary: #022175;
+  --primary-light: #09338c;
+  --accent: #e4614a;
+  --accent-dark: #cf4f39;
+  --primary-rgb: 2, 33, 117;
+  --accent-rgb: 228, 97, 74;
+  --text: #263238;
+  --muted: #6b7280;
+  --white: #ffffff;
+  --border: rgba(2, 33, 117, 0.08);
+  --shadow: 0 14px 40px rgba(2, 33, 117, 0.08);
+  --interactive-primary-bg: var(--accent);
+  --interactive-primary-bg-hover: var(--accent-dark);
+  --interactive-outline-color: rgba(var(--primary-rgb), 0.28);
+  --interactive-outline-hover: rgba(var(--accent-rgb), 0.14);
+  --interactive-shadow: 0 8px 18px rgba(var(--primary-rgb), 0.16);
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+  --container: 1180px;
+
+  /* ── Map Bootstrap tokens to Cookly brand ── */
+  --bs-primary: #022175;
+  --bs-primary-rgb: 2, 33, 117;
+  --bs-body-font-family: "Roboto", sans-serif;
+  --bs-body-bg: #f5eede;
+  --bs-body-color: #263238;
+  --bs-link-color: #022175;
+  --bs-link-hover-color: #e4614a;
+  --bs-border-color: rgba(2, 33, 117, 0.08);
+  --bs-card-border-radius: 1.5rem;
+  --bs-card-border-color: rgba(2, 33, 117, 0.08);
+  --bs-card-box-shadow: 0 14px 40px rgba(2, 33, 117, 0.08);
+}
+
+/* ── Container: match Cookly's fluid-up-to-1180px behaviour ── */
+.container,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl,
+.container-xxl {
+  max-width: min(92%, 1180px) !important;
+}
+
+/* ── Buttons: coral primary, Cookly outline, always pill-shaped ── */
+.btn {
+  border-radius: var(--radius-pill) !important;
+  font-weight: 700;
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  --bs-btn-bg: #e4614a;
+  --bs-btn-border-color: #e4614a;
+  --bs-btn-hover-bg: #cf4f39;
+  --bs-btn-hover-border-color: #cf4f39;
+  --bs-btn-active-bg: #cf4f39;
+  --bs-btn-active-border-color: #cf4f39;
+  --bs-btn-focus-shadow-rgb: 228, 97, 74;
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #022175;
+  --bs-btn-border-color: rgba(2, 33, 117, 0.25);
+  --bs-btn-hover-bg: rgba(2, 33, 117, 0.06);
+  --bs-btn-hover-border-color: rgba(2, 33, 117, 0.4);
+  --bs-btn-hover-color: #022175;
+  --bs-btn-active-bg: rgba(2, 33, 117, 0.1);
+  --bs-btn-active-color: #022175;
+}
+
+/* Keep existing .btn-outline class working (used by JS-generated buttons) */
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid rgba(2, 33, 117, 0.18);
+  border-radius: var(--radius-pill) !important;
+  font-weight: 700;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(2, 33, 117, 0.05);
+  transform: translateY(-2px);
+}
+
+.btn-sm { padding: 7px 16px !important; font-size: 0.85rem !important; }
+.btn-lg { padding: 16px 28px !important; font-size: 1rem !important; }
+
+/* ── Form controls: Cookly focus ring ── */
+.form-control,
+.form-select {
+  border-radius: 12px !important;
+  border-color: var(--border);
+  background-color: var(--bg-soft);
+  color: var(--text);
+  font-family: "Roboto", sans-serif;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: rgba(2, 33, 117, 0.35);
+  box-shadow: 0 0 0 0.2rem rgba(2, 33, 117, 0.08);
+  background-color: var(--white);
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 0.95rem;
+}
+
+/* ── Cards: Cookly border-radius + shadow ── */
+.card {
+  border-radius: var(--radius-lg) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  background: var(--white);
+}
+
+/* ── Badges ── */
+.badge {
+  border-radius: var(--radius-pill) !important;
+  font-weight: 700;
+}
+
+.badge-published {
+  background: rgba(22, 163, 74, 0.12) !important;
+  color: #16a34a !important;
+}
+
+.badge-pending {
+  background: rgba(234, 179, 8, 0.12) !important;
+  color: #b45309 !important;
+}
+
+/* ── Utility: hidden (used by JS across the project) ── */
+.hidden { display: none !important; }
+
+/* ── Fredoka headings ── */
+.ck-title {
+  font-family: "Fredoka", sans-serif;
+  color: var(--primary);
+}

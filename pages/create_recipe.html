@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookly | Create Recipe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles/navbar.css" />
+  <link rel="stylesheet" href="../styles/buttons.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+
+  <style>
+    .create-wrap {
+      padding: 60px 0 80px;
+    }
+
+    .create-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 40px 36px;
+      max-width: 700px;
+      margin: 36px auto 0;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font: inherit;
+      color: var(--text);
+      background: var(--bg-soft);
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus,
+    .input-group textarea:focus {
+      border-color: rgba(2, 33, 117, 0.3);
+    }
+
+    .input-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .input-hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .form-message {
+      text-align: center;
+      margin-top: 14px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      min-height: 22px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 6px;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .ai-box {
+      background: linear-gradient(135deg, rgba(2,33,117,0.04), rgba(228,97,74,0.05));
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 700px;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+
+    .ai-box h3 {
+      font-family: "Fredoka", sans-serif;
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .ai-box p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .ai-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .ai-tab {
+      padding: 8px 22px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .ai-tab.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(2, 33, 117, 0.06);
+    }
+
+    .ai-text-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font: inherit;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+      resize: vertical;
+      min-height: 90px;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .ai-text-input:focus { border-color: rgba(2, 33, 117, 0.3); }
+
+    .ai-upload-label {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .ai-upload-label:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    #aiImageInput { display: none; }
+
+    #aiPreview {
+      max-height: 160px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .ai-generate-btn {
+      padding: 11px 28px;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .ai-generate-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    .ai-generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    #aiStatus {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      min-height: 18px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 700px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .create-card { padding: 28px 18px; }
+      .input-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../Cookly.html" class="logo">Cookly</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../Cookly.html#home">Home</a>
+        <a href="../Cookly.html#recipes">Recipes</a>
+        <a href="favourites.html">Favorites</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <main class="create-wrap">
+    <div class="container">
+
+      <div class="section-heading center">
+        <h2>Create a Recipe</h2>
+        <p>Add your own recipe — only you can see it.</p>
+      </div>
+
+      <!-- AI Generator -->
+      <div class="ai-box">
+        <h3>✨ Generate with AI</h3>
+        <p>Upload a photo or describe a dish — Gemini will create the recipe for you.</p>
+
+        <div class="ai-tabs">
+          <button type="button" class="ai-tab active" id="tabPhoto">📷 From Photo</button>
+          <button type="button" class="ai-tab" id="tabText">✏️ Describe It</button>
+        </div>
+
+        <div id="aiPhotoSection">
+          <input type="file" id="aiImageInput" accept="image/*" />
+          <label for="aiImageInput" class="ai-upload-label">📷 Choose Photo</label>
+          <br />
+          <img id="aiPreview" alt="Preview" />
+        </div>
+
+        <div id="aiTextSection" style="display:none;">
+          <textarea id="aiTextInput" class="ai-text-input" placeholder="e.g. A creamy Italian pasta with mushrooms and truffle oil, garnished with parmesan..."></textarea>
+        </div>
+
+        <button type="button" class="ai-generate-btn" id="aiGenerateBtn" disabled>Generate Recipe</button>
+        <p id="aiStatus"></p>
+      </div>
+
+      <div class="divider">or fill in manually</div>
+
+      <div class="create-card">
+        <form id="createRecipeForm">
+
+          <div class="input-group">
+            <label for="recipeName">Recipe Name *</label>
+            <input type="text" id="recipeName" placeholder="e.g. Classic Glazed Donuts" />
+          </div>
+
+          <div class="input-group">
+            <label for="recipeCategory">Category *</label>
+            <select id="recipeCategory">
+              <option value="">Select a category</option>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Snacks">Snacks</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="recipeDescription">Description *</label>
+            <textarea id="recipeDescription" placeholder="Briefly describe your recipe..."></textarea>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="recipeCalories">Calories</label>
+              <input type="number" id="recipeCalories" min="0" placeholder="e.g. 350" />
+            </div>
+            <div class="input-group">
+              <label for="recipeTime">Time (minutes)</label>
+              <input type="number" id="recipeTime" min="0" placeholder="e.g. 30" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Recipe Image</label>
+            <input type="file" id="recipeImageFile" accept="image/*" style="display:none;" />
+            <label for="recipeImageFile" class="ai-upload-label" id="recipeImageLabel" style="display:block;width:fit-content;">📷 Choose Image</label>
+            <img id="recipeImagePreview" alt="Preview" style="max-height:160px;border-radius:12px;object-fit:cover;margin-top:10px;display:none;" />
+            <span class="input-hint">Upload a photo of your recipe (optional).</span>
+          </div>
+
+          <div class="input-group">
+            <label for="recipeIngredients">Ingredients *</label>
+            <textarea id="recipeIngredients" placeholder="e.g. 2 cups flour, 1 tsp salt, 3 eggs..."></textarea>
+            <span class="input-hint">Write all ingredients in one block of text.</span>
+          </div>
+
+          <div class="input-group">
+            <label for="recipeInstructions">Instructions *</label>
+            <textarea id="recipeInstructions" style="min-height: 140px;" placeholder="Step 1: Preheat oven to 180°C&#10;Step 2: Mix the dry ingredients&#10;Step 3: ..."></textarea>
+            <span class="input-hint">Each line becomes a separate step.</span>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Save Recipe</button>
+
+        </form>
+
+        <p id="formMessage" class="form-message"></p>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../scripts/navbar.js"></script>
+  <script type="module" src="../scripts/create_recipe.js"></script>
+  <link rel="stylesheet" href="../styles/chatbot.css" />
+  <script type="module" src="../scripts/chatbot.js"></script>
+</body>
+</html>

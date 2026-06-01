@@ -62,13 +62,7 @@ function resolveRecipeImagePath(value) {
 
 async function unfavorite(recipeId, uid, cardEl) {
   try {
-    const q = query(
-      collection(db, "favorites"),
-      where("userId", "==", uid),
-      where("recipeId", "==", recipeId)
-    );
-    const snap = await getDocs(q);
-    await Promise.all(snap.docs.map(d => deleteDoc(d.ref)));
+    await deleteDoc(doc(db, "users", uid, "favorites", recipeId));
     cardEl.remove();
 
     if (!favoritesGrid.children.length) {
@@ -138,8 +132,7 @@ async function loadFavorites(uid) {
     favStatus.textContent = "";
     favoritesGrid.innerHTML = "";
 
-    const favQ = query(collection(db, "favorites"), where("userId", "==", uid));
-    const favSnap = await getDocs(favQ);
+    const favSnap = await getDocs(collection(db, "users", uid, "favorites"));
 
     if (favSnap.empty) {
       favStatus.textContent = "You have no favorites yet.";
@@ -147,7 +140,7 @@ async function loadFavorites(uid) {
     }
 
     const recipeIds = [...new Set(
-      favSnap.docs.map(d => d.data().recipeId).filter(Boolean)
+      favSnap.docs.map(d => d.data().recipeId || d.id).filter(Boolean)
     )];
 
     const recipes = (await Promise.all(recipeIds.map(fetchRecipeById))).filter(Boolean);

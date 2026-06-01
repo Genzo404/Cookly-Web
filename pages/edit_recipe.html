@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookly | Edit Recipe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles/navbar.css" />
+  <link rel="stylesheet" href="../styles/buttons.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+
+  <style>
+    .edit-wrap { padding: 60px 0 80px; }
+
+    .edit-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 40px 36px;
+      max-width: 700px;
+      margin: 36px auto 0;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font: inherit;
+      color: var(--text);
+      background: var(--bg-soft);
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus,
+    .input-group textarea:focus { border-color: rgba(2, 33, 117, 0.3); }
+
+    .input-group textarea { resize: vertical; min-height: 100px; }
+
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .input-hint { font-size: 0.82rem; color: var(--muted); }
+
+    .form-message {
+      text-align: center;
+      margin-top: 14px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      min-height: 22px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 6px;
+    }
+
+    .submit-btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .current-image-wrap { margin-bottom: 10px; }
+    .current-image-wrap img {
+      max-height: 160px;
+      border-radius: 12px;
+      object-fit: contain;
+      background: var(--bg-soft);
+      display: block;
+    }
+    .current-image-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 6px; }
+
+    .file-upload-label {
+      display: inline-block;
+      padding: 9px 20px;
+      border-radius: var(--radius-pill);
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .file-upload-label:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .edit-card { padding: 28px 18px; }
+      .input-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../Cookly.html" class="logo">Cookly</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="../Cookly.html#home">Home</a>
+        <a href="../Cookly.html#recipes">Recipes</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <main class="edit-wrap">
+    <div class="container">
+
+      <div class="section-heading center">
+        <h2>Edit Recipe</h2>
+        <p>Update your recipe details.</p>
+      </div>
+
+      <div class="edit-card">
+        <form id="editRecipeForm">
+
+          <div class="input-group">
+            <label for="recipeName">Recipe Name *</label>
+            <input type="text" id="recipeName" placeholder="e.g. Classic Glazed Donuts" />
+          </div>
+
+          <div class="input-group">
+            <label for="recipeCategory">Category *</label>
+            <select id="recipeCategory">
+              <option value="">Select a category</option>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Dessert">Dessert</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Snacks">Snacks</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="recipeDescription">Description *</label>
+            <textarea id="recipeDescription" placeholder="Briefly describe your recipe..."></textarea>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="recipeCalories">Calories</label>
+              <input type="number" id="recipeCalories" min="0" placeholder="e.g. 350" />
+            </div>
+            <div class="input-group">
+              <label for="recipeTime">Time (minutes)</label>
+              <input type="number" id="recipeTime" min="0" placeholder="e.g. 30" />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Recipe Image</label>
+            <div id="currentImageWrap" class="current-image-wrap" style="display:none;">
+              <p class="current-image-label">Current image:</p>
+              <img id="currentImagePreview" alt="Current image" />
+            </div>
+            <input type="file" id="recipeImageFile" accept="image/*" style="display:none;" />
+            <label for="recipeImageFile" class="file-upload-label" id="recipeImageLabel">📷 Change Image</label>
+            <img id="newImagePreview" alt="New image preview" style="max-height:140px;border-radius:12px;object-fit:contain;margin-top:10px;display:none;" />
+            <span class="input-hint">Leave unchanged to keep the current image.</span>
+          </div>
+
+          <div class="input-group">
+            <label for="recipeIngredients">Ingredients *</label>
+            <textarea id="recipeIngredients" placeholder="e.g. 2 cups flour, 1 tsp salt, 3 eggs..."></textarea>
+            <span class="input-hint">Write all ingredients in one block of text.</span>
+          </div>
+
+          <div class="input-group">
+            <label for="recipeInstructions">Instructions *</label>
+            <textarea id="recipeInstructions" style="min-height: 140px;" placeholder="Step 1: ..."></textarea>
+            <span class="input-hint">Each line becomes a separate step.</span>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Save Changes</button>
+
+        </form>
+
+        <p id="formMessage" class="form-message"></p>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../scripts/navbar.js"></script>
+  <script type="module" src="../scripts/edit_recipe.js"></script>
+  <link rel="stylesheet" href="../styles/chatbot.css" />
+  <script type="module" src="../scripts/chatbot.js"></script>
+</body>
+</html>

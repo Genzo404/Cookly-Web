@@ -37,6 +37,7 @@
   width: 100%;
   height: 240px;
   object-fit: cover;
+  background: var(--bg-soft);
 }
 
 .recipe-card-content {
@@ -107,6 +108,8 @@
 .recipe-card-actions {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 0;
   margin-left: auto;
 }
@@ -172,4 +175,42 @@
 
 .fav-btn.is-fav {
   color: #e85d43;
+}
+
+.card-vote-row {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 12px;
+}
+
+.card-vote-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-soft);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+
+.card-vote-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.card-vote-active-up {
+  border-color: #16a34a !important;
+  background: rgba(22, 163, 74, 0.1) !important;
+  color: #16a34a !important;
+}
+
+.card-vote-active-down {
+  border-color: var(--accent) !important;
+  background: rgba(228, 97, 74, 0.1) !important;
+  color: var(--accent) !important;
 }

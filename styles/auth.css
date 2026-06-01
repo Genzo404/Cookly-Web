@@ -1,3 +1,87 @@
+/* ============================================================
+   BOOTSTRAP VERSION (active)
+   ============================================================ */
+
+/* .ck-bg   { background: #f5eede; }
+
+.ck-card { border-radius: 24px !important; }
+
+.ck-title {
+  font-family: "Fredoka", sans-serif;
+  color: #022175;
+}
+
+.ck-input:focus {
+  border-color: rgba(2, 33, 117, 0.35);
+  box-shadow: 0 0 0 3px rgba(2, 33, 117, 0.08);
+}
+
+.ck-btn {
+  background: #e4614a;
+  color: #fff;
+  border: none;
+}
+
+.ck-btn:hover, .ck-btn:focus {
+  background: #cf4f39;
+  color: #fff;
+}
+
+.ck-btn-google {
+  border: 2px solid #e5e7eb;
+  background: #fff;
+  color: #374151;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+}
+
+.ck-btn-google:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.ck-link {
+  color: #022175;
+  text-decoration: none;
+}
+
+.ck-link:hover { color: #e4614a; }
+
+.ck-message { color: #022175; }
+
+.ck-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.ck-divider::before,
+.ck-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.hidden { display: none !important; }
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shape-blue  { width: 200px; height: 200px; background: rgba(2,33,117,0.1);  top: 0; left: 0; }
+.shape-coral { width: 180px; height: 180px; background: rgba(228,97,74,0.15); bottom: 0; right: 0; } */
+
+
+/* ============================================================
+   ORIGINAL VERSION (before Bootstrap — for reference)
+   ============================================================
+============================================================ */
 :root {
   --bg: #f5eede;
   --primary: #022175;
@@ -18,7 +102,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Container */
 .auth-container {
   min-height: 100vh;
   display: grid;
@@ -26,7 +109,6 @@ body {
   position: relative;
 }
 
-/* Card */
 .auth-card {
   background: var(--white);
   padding: 40px 30px;
@@ -49,7 +131,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Inputs */
 .input-group {
   text-align: left;
   margin-bottom: 16px;
@@ -68,7 +149,6 @@ body {
   border: 1px solid #ddd;
 }
 
-/* Button */
 .btn-primary {
   width: 100%;
   padding: 14px;
@@ -85,7 +165,6 @@ body {
   background: #cf4f39;
 }
 
-/* Switch */
 .auth-switch {
   margin-top: 20px;
 }
@@ -95,14 +174,100 @@ body {
   font-weight: bold;
 }
 
-/* Message */
+.hidden {
+  display: none !important;
+}
+
+.forgot-link {
+  text-align: right;
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-size: 0.88rem;
+}
+
+.forgot-link a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.forgot-link a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.forgot-form {
+  text-align: left;
+}
+
+.forgot-desc {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+}
+
+.forgot-form p a {
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.forgot-form p a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.btn-google {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 50px;
+  background: var(--white);
+  color: #374151;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 4px;
+}
+
+.btn-google:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.btn-google img {
+  width: 20px;
+  height: 20px;
+}
+
 .message {
   margin-top: 12px;
   font-size: 0.9rem;
   color: var(--primary);
 }
 
-/* Shapes */
 .shape {
   position: absolute;
   border-radius: 50%;
@@ -124,3 +289,5 @@ body {
   bottom: 0;
   right: 0;
 }
+
+

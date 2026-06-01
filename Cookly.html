@@ -28,10 +28,7 @@
       <nav class="nav-links" id="navLinks">
         <a href="#home">Home</a>
         <a href="#recipes">Recipes</a>
-        <a href="pages/favourites.html">Favorites</a>
-        <a href="#features">Features</a>
-        <a href="#about">About</a>
-        
+        <a href="pages/chat.html" id="messagesNavLink" style="display:none;">Messages</a>
       </nav>
 
       <!-- NAV ACTIONS -->
@@ -42,7 +39,7 @@
         </div>
 
         <div id="userActions" class="auth-actions" style="display: none;">
-          <span id="welcomeText" class="welcome-text"></span>
+          <a id="welcomeText" href="pages/profile.html" class="welcome-text"></a>
           <button id="logoutBtn" class="btn btn-outline" type="button">Log Out</button>
         </div>
 
@@ -69,7 +66,7 @@
 
           <div class="hero-buttons">
             <!-- CTA -->
-            <a href="pages/Register.html" class="btn btn-primary btn-large">
+            <a href="pages/Register.html" class="btn btn-primary btn-large" id="startCookingBtn">
               Start Cooking!
             </a>
 
@@ -77,8 +74,8 @@
               Get Our Mobile App
              </a>
 
-            <a href="#recipes" class="btn btn-secondary btn-large">
-              Explore Recipes
+            <a href="pages/create_recipe.html" class="btn btn-secondary btn-large" id="createRecipeBtn">
+              Create Recipe
             </a>
           </div>
 
@@ -119,7 +116,6 @@
       </div>
 
       <div class="shape shape-blue"></div>
-      <div class="shape shape-coral"></div>
     </section>
 
     <!-- SEARCH -->
@@ -131,6 +127,22 @@
           <p>Search recipes by name, ingredient, or category.</p>
         </div>
 
+        <div class="source-filter" id="sourceFilter">
+          <div class="filter-dropdown">
+            <button class="source-btn active" id="sourceToggleBtn">
+              <span id="sourceLabel">Default Recipes</span>
+              <span class="dropdown-arrow">▾</span>
+            </button>
+            <div class="filter-dropdown-menu">
+              <button class="source-btn active" data-source="default">Default Recipes</button>
+              <button class="source-btn" data-source="community">Community Recipes</button>
+              <button class="source-btn" data-source="mine">My Recipes</button>
+              <button class="source-btn" data-source="all">All Recipes</button>
+            </div>
+          </div>
+          <a href="pages/favourites.html" class="source-btn">Favorites</a>
+        </div>
+
         <div class="search-bar">
           <input
             id="recipeSearch"
@@ -140,41 +152,30 @@
         </div>
 
         <div class="search-filters" aria-label="Recipe filters">
-          <select id="categoryFilter">
-            <option value="">All categories</option>
-          </select>
-          <input id="maxTimeFilter" type="number" min="0" placeholder="Max time (min)" />
-          <input id="maxCaloriesFilter" type="number" min="0" placeholder="Max calories" />
-          <button id="clearFilters" class="btn btn-outline" type="button">Clear</button>
+          <div class="filter-dropdown" id="categoryDropdown">
+            <button class="filter-pill-btn" id="categoryToggleBtn">
+              <span id="categoryLabel">All categories</span>
+              <span class="dropdown-arrow">▾</span>
+            </button>
+            <div class="filter-dropdown-menu" id="categoryMenu"></div>
+          </div>
+          <input id="maxTimeFilter" class="filter-pill-input" type="number" min="0" placeholder="Max time (min)" />
+          <input id="maxCaloriesFilter" class="filter-pill-input" type="number" min="0" placeholder="Max calories" />
+          <div class="filter-dropdown" id="sortDropdown">
+            <button class="filter-pill-btn" id="sortToggleBtn">
+              <span id="sortLabel">Sort: Default</span>
+              <span class="dropdown-arrow">▾</span>
+            </button>
+            <div class="filter-dropdown-menu" id="sortMenu">
+              <button class="filter-dropdown-item active" data-sort="default">Default</button>
+              <button class="filter-dropdown-item" data-sort="most_liked">Most Liked</button>
+              <button class="filter-dropdown-item" data-sort="least_liked">Least Liked</button>
+            </div>
+          </div>
+          <button id="clearFilters" class="filter-pill-btn" type="button">Clear</button>
         </div>
 
-        <div class="recipe-grid" id="recipeGrid">
-
-          <article class="recipe-card">
-            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19" />
-            <div class="recipe-card-content">
-              <span class="recipe-tag">Italian</span>
-              <h3>Creamy Pasta</h3>
-            </div>
-          </article>
-
-          <article class="recipe-card">
-            <img src="https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4" />
-            <div class="recipe-card-content">
-              <span class="recipe-tag">Healthy</span>
-              <h3>Chicken Bowl</h3>
-            </div>
-          </article>
-
-          <article class="recipe-card">
-            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187" />
-            <div class="recipe-card-content">
-              <span class="recipe-tag">Dessert</span>
-              <h3>Chocolate Cake</h3>
-            </div>
-          </article>
-
-        </div>
+        <div class="recipe-grid" id="recipeGrid"></div>
       </div>
     </section>
 
@@ -230,11 +231,12 @@
       <div class="footer-links">
         <a href="#home">Home</a>
         <a href="#recipes">Recipes</a>
-        <a href="#features">Features</a>
       </div>
     </div>
   </footer>
 
   <script type="module" src="scripts/home.js"></script>
+  <link rel="stylesheet" href="styles/chatbot.css" />
+  <script type="module" src="scripts/chatbot.js"></script>
 </body>
 </html>

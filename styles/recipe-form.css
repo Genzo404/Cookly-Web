@@ -1,0 +1,176 @@
+/* Shared styles for create_recipe.html and edit_recipe.html */
+
+.recipe-form-wrap { padding: 60px 0 80px; }
+
+/* AI Generator box */
+.ai-box {
+  background: linear-gradient(135deg, rgba(2,33,117,0.04), rgba(228,97,74,0.05));
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  max-width: 700px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.ai-box h3 {
+  font-family: "Fredoka", sans-serif;
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.ai-box p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.ai-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.ai-tab {
+  padding: 8px 22px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.ai-tab.active {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(2, 33, 117, 0.06);
+}
+
+.ai-text-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+  resize: vertical;
+  min-height: 90px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.ai-text-input:focus { border-color: rgba(2, 33, 117, 0.3); }
+
+.ai-upload-label {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  margin-bottom: 12px;
+}
+
+.ai-upload-label:hover { border-color: var(--accent); color: var(--accent); }
+
+#aiImageInput { display: none; }
+
+#aiPreview {
+  max-height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 14px;
+  display: none;
+}
+
+.ai-generate-btn {
+  padding: 11px 28px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--primary);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.ai-generate-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+.ai-generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+#aiStatus {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  min-height: 18px;
+}
+
+/* Divider between AI and manual form */
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 700px;
+  margin: 0 auto 24px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.form-divider::before,
+.form-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* File upload label */
+.file-upload-label {
+  display: inline-block;
+  padding: 9px 20px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  margin-bottom: 8px;
+}
+
+.file-upload-label:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Current image (edit page) */
+.current-image-wrap { margin-bottom: 10px; }
+.current-image-wrap img {
+  max-height: 160px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: var(--bg-soft);
+  display: block;
+}
+.current-image-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 6px; }
+
+.input-hint { font-size: 0.82rem; color: var(--muted); }
+
+.form-message {
+  text-align: center;
+  margin-top: 14px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  min-height: 22px;
+}

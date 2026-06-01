@@ -1,6 +1,11 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentSingleTabManager
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCCvCaNzHTh3UqIpD_41bHLU1s5n6ikFh8",
@@ -13,5 +18,13 @@ const firebaseConfig = {
 };
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const auth    = getAuth(app);
+export const storage = getStorage(app);
+
+// Persistent cache: Firestore data is stored in IndexedDB so repeat visits
+// load instantly from local storage instead of hitting the network.
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentSingleTabManager()
+  })
+});

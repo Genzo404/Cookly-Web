@@ -1,0 +1,34 @@
+{
+  "hosting": [
+    {
+      "site": "cookly-recipes",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "/",
+          "destination": "/Cookly.html"
+        }
+      ]
+    },
+    {
+      "site": "cookly-e712f",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "/",
+          "destination": "/Cookly.html"
+        }
+      ]
+    }
+  ]
+}

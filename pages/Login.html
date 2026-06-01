@@ -38,10 +38,42 @@
 
       <button type="submit" class="btn-primary">Log In</button>
 
+      <p class="forgot-link">
+        <a href="#" id="forgotPasswordLink">Forgot password?</a>
+      </p>
+
     </form>
 
+    <!-- 2FA challenge form (hidden by default) -->
+    <div id="mfaForm" class="forgot-form hidden">
+      <p class="forgot-desc">Enter the 6-digit code from your authenticator app.</p>
+      <div class="input-group">
+        <label>Authentication Code</label>
+        <input type="text" id="mfaCode" placeholder="000000" maxlength="6" inputmode="numeric" />
+      </div>
+      <button id="mfaSubmitBtn" class="btn-primary">Verify</button>
+      <p><a href="#" id="mfaBackBtn">← Back to login</a></p>
+    </div>
+
+    <!-- Forgot password form (hidden by default) -->
+    <div id="forgotForm" class="forgot-form hidden">
+      <p class="forgot-desc">Enter your email and we'll send you a reset link.</p>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="resetEmail" placeholder="Enter your email" />
+      </div>
+      <button id="sendResetBtn" class="btn-primary">Send Reset Link</button>
+      <p><a href="#" id="backToLogin">← Back to login</a></p>
+    </div>
+
+    <div class="auth-divider"><span>or</span></div>
+    <button type="button" id="googleSignInBtn" class="btn-google">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+      Continue with Google
+    </button>
+
     <p class="auth-switch">
-      Don’t have an account?
+      Don't have an account?
       <a href="Register.html">Sign up</a>
     </p>
 
