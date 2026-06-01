@@ -279,13 +279,16 @@ function renderPage() {
     const downvotes = votes?.downvotes ?? 0;
     const userVote  = userVotesCache.get(id) || null;
 
+    const notVerified = currentUser && !currentUser.emailVerified;
+    const lockedStyle = notVerified ? ' style="opacity:0.5;cursor:not-allowed;"' : '';
+
     // Always render vote buttons for non-mine recipes (starts at 0, updated after background fetch)
     const voteRow = recipe._source !== "mine" ? `
       <div class="card-vote-row">
-        <button class="card-vote-btn card-upvote-btn${userVote === "up" ? " card-vote-active-up" : ""}">
+        <button class="card-vote-btn card-upvote-btn${userVote === "up" ? " card-vote-active-up" : ""}"${lockedStyle}>
           👍 <span class="card-up-count">${upvotes}</span>
         </button>
-        <button class="card-vote-btn card-downvote-btn${userVote === "down" ? " card-vote-active-down" : ""}">
+        <button class="card-vote-btn card-downvote-btn${userVote === "down" ? " card-vote-active-down" : ""}"${lockedStyle}>
           👎 <span class="card-down-count">${downvotes}</span>
         </button>
       </div>` : "";
@@ -513,9 +516,24 @@ async function toggleFavorite(recipe) {
   }
 }
 
+function showVerifyToast() {
+  if (document.getElementById("verifyToast")) return;
+  const toast = document.createElement("div");
+  toast.id = "verifyToast";
+  toast.style.cssText = `
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+    background:#022175;color:#fff;padding:14px 24px;border-radius:12px;
+    font-size:0.9rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.25);
+    white-space:nowrap;
+  `;
+  toast.textContent = "Please verify your email to vote.";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
 async function handleCardVote(recipeId, type, cardEl) {
   if (!currentUser) { window.location.href = "pages/Login.html"; return; }
-  if (!currentUser.emailVerified) return;
+  if (!currentUser.emailVerified) { showVerifyToast(); return; }
 
   const voteRef    = doc(db, "recipe_interactions", recipeId, "votes", currentUser.uid);
   const counterRef = doc(db, "recipe_interactions", recipeId);

@@ -3,7 +3,7 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/fi
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 import { auth, db, storage } from "./firebase.js";
 
-const GEMINI_API_KEY = "AIzaSyCTPSUpGCjWn4r33a807E1ZWZ7BiZlfLAg";
+import { GEMINI_API_KEY } from "./config.js";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 const JSON_PROMPT_SUFFIX = `

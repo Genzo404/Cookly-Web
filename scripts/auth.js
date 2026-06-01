@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   sendPasswordResetEmail,
+  sendEmailVerification,
   getMultiFactorResolver,
   TotpMultiFactorGenerator,
   GoogleAuthProvider,
@@ -23,6 +24,11 @@ function setMessage(text, ok = false) {
   messageEl.style.color = ok ? "#1e7e34" : "#c0392b";
 }
 
+const redirectAfterLogin = new URLSearchParams(window.location.search).get("redirect");
+function getLoginRedirect() {
+  return redirectAfterLogin || "../Cookly.html";
+}
+
 // GOOGLE SIGN-IN
 const googleBtn = document.getElementById("googleSignInBtn");
 
@@ -35,7 +41,7 @@ googleBtn?.addEventListener("click", async () => {
     const name  = user.displayName || user.email?.split("@")[0] || "User";
     localStorage.setItem("userName", name);
     localStorage.setItem("loggedInUser", name);
-    window.location.href = "../Cookly.html";
+    window.location.href = getLoginRedirect();
   } catch (err) {
     if (err.code === "auth/multi-factor-auth-required") {
       mfaResolver = getMultiFactorResolver(auth, err);
@@ -79,7 +85,7 @@ mfaSubmitBtn?.addEventListener("click", async () => {
     localStorage.setItem("userName", name);
     localStorage.setItem("loggedInUser", name);
     setMessage("Login successful.", true);
-    window.location.href = "../Cookly.html";
+    window.location.href = getLoginRedirect();
   } catch (err) {
     setMessage("Invalid code. Please try again.");
   } finally {
@@ -149,7 +155,7 @@ if (loginForm) {
       localStorage.setItem("loggedInUser", name);
 
       setMessage("Login successful.", true);
-      window.location.href = "../Cookly.html";
+      window.location.href = getLoginRedirect();
     } catch (err) {
       if (err.code === "auth/multi-factor-auth-required") {
         mfaResolver = getMultiFactorResolver(auth, err);
@@ -203,12 +209,13 @@ if (registerForm) {
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(cred.user, { displayName: name });
+      await sendEmailVerification(cred.user);
 
       localStorage.setItem("userName", name);
       localStorage.setItem("loggedInUser", name);
 
-      setMessage("Account created successfully.", true);
-      window.location.href = "../Cookly.html";
+      setMessage("Account created! We sent a verification link to " + email + ". Please check your inbox before continuing.", true);
+      setTimeout(() => { window.location.href = getLoginRedirect(); }, 4000);
     } catch (err) {
       console.error(err);
       if (err.code === "auth/email-already-in-use") {

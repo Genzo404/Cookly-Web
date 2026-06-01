@@ -113,16 +113,18 @@ function initInteractions(recipeId, recipe = {}) {
 
   panel.innerHTML = `
     <div class="vote-row">
-      <button class="vote-btn" id="upvoteBtn" disabled>👍 <span id="upvoteCount">—</span></button>
-      <button class="vote-btn" id="downvoteBtn" disabled>👎 <span id="downvoteCount">—</span></button>
+      <button class="vote-btn" id="upvoteBtn">👍 <span id="upvoteCount">—</span></button>
+      <button class="vote-btn" id="downvoteBtn">👎 <span id="downvoteCount">—</span></button>
     </div>
     <div class="comments-wrap">
       <h3>Comments</h3>
-      <div id="commentForm" class="hidden">
+      <div id="commentForm">
         <textarea id="commentInput" class="comment-input" placeholder="Write a comment..." rows="3"></textarea>
-        <button id="submitCommentBtn" class="btn btn-primary btn-sm" style="margin-top:8px;">Post Comment</button>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+          <button id="submitCommentBtn" class="btn btn-primary btn-sm">Post Comment</button>
+          <p id="commentGate" class="comment-gate" style="margin:0;"></p>
+        </div>
       </div>
-      <p id="commentGate" class="comment-gate"></p>
       <div id="commentsList" class="comments-list"></div>
     </div>
   `;
@@ -146,28 +148,36 @@ function initInteractions(recipeId, recipe = {}) {
         voteRow.appendChild(messageBtn);
       }
     }
-    const upvoteBtn     = document.getElementById("upvoteBtn");
-    const downvoteBtn   = document.getElementById("downvoteBtn");
-    const commentForm   = document.getElementById("commentForm");
-    const commentGate   = document.getElementById("commentGate");
+
+    const upvoteBtn   = document.getElementById("upvoteBtn");
+    const downvoteBtn = document.getElementById("downvoteBtn");
+    const commentGate = document.getElementById("commentGate");
+    const submitBtn   = document.getElementById("submitCommentBtn");
+
+    const loginRedirect = `Login.html?redirect=${encodeURIComponent(window.location.href)}`;
 
     if (user?.emailVerified) {
-      if (upvoteBtn)   { upvoteBtn.disabled   = false; upvoteBtn.onclick   = () => handleVote(recipeId, user.uid, "up");   }
-      if (downvoteBtn) { downvoteBtn.disabled = false; downvoteBtn.onclick = () => handleVote(recipeId, user.uid, "down"); }
-      commentForm?.classList.remove("hidden");
+      // Fully verified — unlock everything
+      if (upvoteBtn)   { upvoteBtn.disabled = false;   upvoteBtn.style.opacity = "";   upvoteBtn.onclick   = () => handleVote(recipeId, user.uid, "up");   }
+      if (downvoteBtn) { downvoteBtn.disabled = false; downvoteBtn.style.opacity = ""; downvoteBtn.onclick = () => handleVote(recipeId, user.uid, "down"); }
       if (commentGate) commentGate.textContent = "";
-
+      if (submitBtn)   { submitBtn.disabled = false; submitBtn.style.opacity = ""; }
+      submitBtn?.addEventListener("click", () => submitComment(recipeId, user));
       loadUserVote(recipeId, user.uid);
 
-      document.getElementById("submitCommentBtn")?.addEventListener("click", () => {
-        submitComment(recipeId, user);
-      });
+    } else if (user) {
+      // Logged in but not verified — disable all with inline message
+      if (upvoteBtn)   { upvoteBtn.disabled   = true; upvoteBtn.style.opacity   = "0.5"; }
+      if (downvoteBtn) { downvoteBtn.disabled = true; downvoteBtn.style.opacity = "0.5"; }
+      if (submitBtn)   { submitBtn.disabled   = true; submitBtn.style.opacity   = "0.5"; }
+      if (commentGate) commentGate.textContent = "Verify your email to vote and comment.";
+
     } else {
-      if (commentGate) {
-        commentGate.textContent = user
-          ? "Verify your email to vote and leave comments."
-          : "Log in to vote and leave comments.";
-      }
+      // Not logged in — everything redirects to login
+      if (upvoteBtn)   { upvoteBtn.disabled   = false; upvoteBtn.onclick   = () => { window.location.href = loginRedirect; }; }
+      if (downvoteBtn) { downvoteBtn.disabled = false; downvoteBtn.onclick = () => { window.location.href = loginRedirect; }; }
+      if (submitBtn)   { submitBtn.disabled   = false; submitBtn.onclick   = () => { window.location.href = loginRedirect; }; }
+      if (commentGate) commentGate.textContent = "";
     }
   });
 }

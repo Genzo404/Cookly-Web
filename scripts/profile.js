@@ -250,6 +250,12 @@ async function loadProfile(user) {
   profileName.textContent     = user.displayName || user.email?.split("@")[0] || "User";
   profileEmail.textContent    = user.email || "";
   profileJoinDate.textContent = formatJoinDate(user);
+
+  // Update 2FA button text based on email verification status
+  const enableBtn = document.getElementById("enableTwoFaBtn");
+  if (enableBtn && !user.emailVerified) {
+    enableBtn.textContent = "Verify Email";
+  }
   if (user.photoURL) {
     setAvatarImage(user.photoURL);
   } else {
@@ -623,7 +629,7 @@ document.getElementById("enableTwoFaBtn")?.addEventListener("click", async () =>
         msg.style.color = "var(--primary)";
         msg.textContent = "Verification email sent! Check your inbox, verify your email, then try again.";
       }
-      btn.disabled = false; btn.textContent = "Enable 2FA";
+      btn.disabled = false; btn.textContent = "Verify Email";
       return;
     }
 
@@ -648,7 +654,8 @@ document.getElementById("enableTwoFaBtn")?.addEventListener("click", async () =>
         : `Error: ${err.message}`;
     }
   } finally {
-    btn.disabled = false; btn.textContent = "Enable 2FA";
+    btn.disabled = false;
+    btn.textContent = auth.currentUser?.emailVerified ? "Enable 2FA" : "Verify Email";
   }
 });
 
